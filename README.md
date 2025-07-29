@@ -1,11 +1,8 @@
 # ✨ Raj Editor — A Lightweight CKEditor-Style Rich Text Editor
 
 Raj Editor is a professional-grade, browser-based rich text editor designed with modern web standards using pure **HTML**, **CSS**, and **JavaScript** — inspired by CKEditor but built from scratch without external dependencies.
-
-
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/112b70a0-c2b3-4719-a551-ff988d247c32" />
-
-
+Raj Editor Screenshot [<img width="959" height="341" alt="Screenshot 2025-07-29 123738" src="https://github.com/user-attachments/assets/3d00269e-bf44-4424-a45f-2b3d375d39b8" />
+]
 ## 🚀 Features
 
 - 📝 Rich text formatting (bold, italic, underline, strikethrough)
@@ -57,3 +54,5 @@ Feel free to use, modify, and contribute.
 ❤️ Author
 Created by Rajesh C
 If you like it, ⭐️ star the repo or contribute!
+
+
