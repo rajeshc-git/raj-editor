@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rich Text Editor - Integration Examples</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background: #f8fafc;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .example {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .example h2 {
+            margin-top: 0;
+            color: #1e293b;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+        }
+        
+        .code-block {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: Monaco, Menlo, 'Ubuntu Mono', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+        }
+        
+        .demo-area {
+            border: 2px dashed #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            background: #fafafa;
+        }
+        
+        .controls {
+            margin: 1rem 0;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.5rem 1rem;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+        
+        .btn:hover {
+            background: #1d4ed8;
+        }
+        
+        .btn-secondary {
+            background: #64748b;
+        }
+        
+        .btn-secondary:hover {
+            background: #475569;
+        }
+        
+        .output {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: Monaco, monospace;
+            font-size: 0.8rem;
+            white-space: pre-wrap;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Raj Text Editor - Integration Examples</h1>
+        <p>Complete examples showing how to integrate the rich text editor in different scenarios.</p>
+
+        <!-- Basic Usage -->
+        <div class="example">
+            <h2>1. Basic Usage</h2>
+            <p>Minimal setup to get the editor running:</p>
+            
+            <div class="code-block">
+&lt;!-- HTML --&gt;
+&lt;div id="basic-editor"&gt;&lt;/div&gt;
+&lt;script src="rich-text-editor.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+const editor = new RichTextEditor('basic-editor');
+&lt;/script&gt;
+            </div>
+
+            <div class="demo-area">
+                <div id="basic-editor"></div>
+            </div>
+        </div>
+
+        <!-- Advanced Configuration -->
+        <div class="example">
+            <h2>2. Advanced Configuration</h2>
+            <p>Editor with custom options and theme:</p>
+            
+            <div class="code-block">
+const editor = new RichTextEditor('advanced-editor', {
+    height: '300px',
+    theme: 'dark',
+    placeholder: 'Write something amazing...',
+    autoSave: true,
+    spellCheck: true
+});
+            </div>
+
+            <div class="demo-area">
+                <div id="advanced-editor"></div>
+            </div>
+        </div>
+
+        <!-- Content Management -->
+        <div class="example">
+            <h2>3. Content Management</h2>
+            <p>Get and set content programmatically:</p>
+            
+            <div class="code-block">
+// Get content
+const htmlContent = editor.getContent();
+const textContent = editor.getText();
+
+// Set content
+editor.setContent('&lt;h2&gt;Hello World&lt;/h2&gt;&lt;p&gt;This is &lt;strong&gt;bold&lt;/strong&gt; text.&lt;/p&gt;');
+
+// Insert HTML at cursor
+editor.insertHTML('&lt;em&gt;Italic text&lt;/em&gt;');
+            </div>
+
+            <div class="demo-area">
+                <div id="content-editor"></div>
+                <div class="controls">
+                    <button class="btn" onclick="getContent()">Get HTML Content</button>
+                    <button class="btn" onclick="getText()">Get Plain Text</button>
+                    <button class="btn btn-secondary" onclick="setContent()">Set Sample Content</button>
+                    <button class="btn btn-secondary" onclick="insertContent()">Insert HTML</button>
+                    <button class="btn btn-secondary" onclick="clearContent()">Clear Content</button>
+                </div>
+                <div id="content-output" class="output" style="display: none;"></div>
+            </div>
+        </div>
+
+        <!-- Form Integration -->
+        <div class="example">
+            <h2>4. Form Integration</h2>
+            <p>Integrate with forms and handle submission:</p>
+            
+            <div class="code-block">
+&lt;form id="articleForm"&gt;
+    &lt;input type="text" name="title" placeholder="Article Title" required&gt;
+    &lt;div id="form-editor"&gt;&lt;/div&gt;
+    &lt;button type="submit"&gt;Save Article&lt;/button&gt;
+&lt;/form&gt;
+
+&lt;script&gt;
+const formEditor = new RichTextEditor('form-editor');
+
+document.getElementById('articleForm').addEventListener('submit', (e) =&gt; {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    formData.append('content', formEditor.getContent());
+    
+    // Send to server
+    fetch('/api/articles', {
+        method: 'POST',
+        body: formData
+    });
+});
+&lt;/script&gt;
+            </div>
+
+            <div class="demo-area">
+                <form id="articleForm">
+                    <input type="text" name="title" placeholder="Article Title" style="width: 100%; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 4px;">
+                    <div id="form-editor"></div>
+                    <button type="submit" class="btn" style="margin-top: 1rem;">Save Article</button>
+                </form>
+                <div id="form-output" class="output" style="display: none;"></div>
+            </div>
+        </div>
+
+        <!-- Multiple Editors -->
+        <div class="example">
+            <h2>5. Multiple Editors</h2>
+            <p>Multiple editor instances on the same page:</p>
+            
+            <div class="code-block">
+// Create multiple editors with different configurations
+const editor1 = new RichTextEditor('editor-1', {
+    height: '200px',
+    theme: 'light',
+    placeholder: 'Editor 1...'
+});
+
+const editor2 = new RichTextEditor('editor-2', {
+    height: '200px', 
+    theme: 'dark',
+    placeholder: 'Editor 2...'
+});
+            </div>
+
+            <div class="demo-area">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div>
+                        <h4>Light Theme Editor</h4>
+                        <div id="editor-1"></div>
+                    </div>
+                    <div>
+                        <h4>Dark Theme Editor</h4>
+                        <div id="editor-2"></div>
+                    </div>
+                </div>
+                <div class="controls">
+                    <button class="btn" onclick="syncEditors()">Sync Content</button>
+                    <button class="btn btn-secondary" onclick="compareContent()">Compare Content</button>
+                </div>
+                <div id="sync-output" class="output" style="display: none;"></div>
+            </div>
+        </div>
+
+        <!-- Auto-initialization -->
+        <div class="example">
+            <h2>6. Auto-initialization with Data Attributes</h2>
+            <p>Automatically initialize editors using data attributes:</p>
+            
+            <div class="code-block">
+&lt;!-- Auto-initialized editors --&gt;
+&lt;div data-rich-editor 
+     data-height="250px"
+     data-theme="light"
+     data-placeholder="Auto-initialized editor..."
+     data-auto-save="true"&gt;&lt;/div&gt;
+            </div>
+
+            <div class="demo-area">
+                <div data-rich-editor 
+                     data-height="250px"
+                     data-theme="light"
+                     data-placeholder="This editor was auto-initialized using data attributes!"
+                     data-auto-save="true"></div>
+            </div>
+        </div>
+
+        <!-- Event Handling -->
+        <div class="example">
+            <h2>7. Event Handling</h2>
+            <p>Listen to editor events and changes:</p>
+            
+            <div class="code-block">
+const editor = new RichTextEditor('event-editor');
+
+// Listen for content changes
+editor.editor.addEventListener('input', () => {
+    console.log('Content changed:', editor.getContent());
+    updateWordCount();
+});
+
+// Listen for focus/blur
+editor.editor.addEventListener('focus', () => {
+    console.log('Editor focused');
+});
+
+editor.editor.addEventListener('blur', () => {
+    console.log('Editor blurred');
+});
+
+function updateWordCount() {
+    const wordCount = editor.getText().split(/\s+/).filter(w => w.length > 0).length;
+    document.getElementById('word-count').textContent = wordCount;
+}
+            </div>
+
+            <div class="demo-area">
+                <div id="event-editor"></div>
+                <div style="margin-top: 1rem; padding: 0.5rem; background: #f1f5f9; border-radius: 4px;">
+                    <strong>Word Count:</strong> <span id="word-count">0</span> words
+                </div>
+                <div id="event-log" class="output" style="max-height: 100px;"></div>
+            </div>
+        </div>
+
+        <!-- Table Features Demo -->
+        <div class="example">
+            <h2>8. Advanced Table Features</h2>
+            <p>Test the enhanced table insertion functionality:</p>
+            
+            <div class="demo-area">
+                <div id="table-editor"></div>
+                <div class="controls">
+                    <button class="btn" onclick="insertCustomTable()">Insert Custom Table</button>
+                    <button class="btn btn-secondary" onclick="showTableFeatures()">Show Table in Content</button>
+                </div>
+                <div id="table-output" class="output" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include the rich text editor -->
+    <script src="rich-text-editor.js"></script>
+    
+    <script>
+        // Initialize all editors
+        const basicEditor = new RichTextEditor('basic-editor', {
+            height: '300px',
+            placeholder: 'This is a basic editor with default settings...'
+        });
+
+        const advancedEditor = new RichTextEditor('advanced-editor', {
+            height: '300px',
+            theme: 'dark',
+            placeholder: 'Write something amazing...',
+            autoSave: true,
+            spellCheck: true
+        });
+
+        const contentEditor = new RichTextEditor('content-editor', {
+            height: '250px',
+            placeholder: 'Use the buttons below to test content management...'
+        });
+
+        const formEditor = new RichTextEditor('form-editor', {
+            height: '200px',
+            placeholder: 'Enter article content here...'
+        });
+
+        const editor1 = new RichTextEditor('editor-1', {
+            height: '200px',
+            theme: 'light',
+            placeholder: 'Light theme editor...'
+        });
+
+        const editor2 = new RichTextEditor('editor-2', {
+            height: '200px', 
+            theme: 'dark',
+            placeholder: 'Dark theme editor...'
+        });
+
+        const eventEditor = new RichTextEditor('event-editor', {
+            height: '200px',
+            placeholder: 'Type here to see events in action...'
+        });
+
+        const tableEditor = new RichTextEditor('table-editor', {
+            height: '300px',
+            placeholder: 'Click the table button in the toolbar to insert advanced tables...'
+        });
+
+        // Content management functions
+        function getContent() {
+            const content = contentEditor.getContent();
+            showOutput('content-output', 'HTML Content:\n' + content);
+        }
+
+        function getText() {
+            const text = contentEditor.getText();
+            showOutput('content-output', 'Plain Text:\n' + text);
+        }
+
+        function setContent() {
+            const sampleContent = `
+                <h2>Sample Article</h2>
+                <p>This is a <strong>sample article</strong> with <em>formatted text</em>.</p>
+                <ul>
+                    <li>First item</li>
+                    <li>Second item with <a href="#">a link</a></li>
+                    <li>Third item</li>
+                </ul>
+                <p>You can <u>underline</u> text and make it <strong><em>bold and italic</em></strong>.</p>
+            `;
+            contentEditor.setContent(sampleContent);
+            showOutput('content-output', 'Content set successfully!');
+        }
+
+        function insertContent() {
+            contentEditor.insertHTML('<span style="background-color: yellow; padding: 2px 4px; border-radius: 2px;">✨ Inserted HTML ✨</span>');
+            showOutput('content-output', 'HTML inserted at cursor position!');
+        }
+
+        function clearContent() {
+            contentEditor.setContent('<p>Content cleared!</p>');
+            showOutput('content-output', 'Content cleared!');
+        }
+
+        // Form handling
+        document.getElementById('articleForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const title = formData.get('title');
+            const content = formEditor.getContent();
+            
+            const articleData = {
+                title: title,
+                content: content,
+                timestamp: new Date().toISOString()
+            };
+            
+            showOutput('form-output', 'Article Data:\n' + JSON.stringify(articleData, null, 2));
+        });
+
+        // Multiple editors functions
+        function syncEditors() {
+            const content1 = editor1.getContent();
+            editor2.setContent(content1);
+            showOutput('sync-output', 'Content synced from Editor 1 to Editor 2!');
+        }
+
+        function compareContent() {
+            const content1 = editor1.getText();
+            const content2 = editor2.getText();
+            const comparison = {
+                'Editor 1 (words)': content1.split(/\s+/).filter(w => w.length > 0).length,
+                'Editor 2 (words)': content2.split(/\s+/).filter(w => w.length > 0).length,
+                'Same content': content1 === content2
+            };
+            showOutput('sync-output', 'Content Comparison:\n' + JSON.stringify(comparison, null, 2));
+        }
+
+        // Event handling
+        let eventCount = 0;
+        eventEditor.editor.addEventListener('input', () => {
+            updateWordCount();
+            logEvent('Content changed');
+        });
+
+        eventEditor.editor.addEventListener('focus', () => {
+            logEvent('Editor focused');
+        });
+
+        eventEditor.editor.addEventListener('blur', () => {
+            logEvent('Editor blurred');
+        });
+
+        function updateWordCount() {
+            const wordCount = eventEditor.getText().split(/\s+/).filter(w => w.length > 0).length;
+            document.getElementById('word-count').textContent = wordCount;
+        }
+
+        function logEvent(message) {
+            eventCount++;
+            const timestamp = new Date().toLocaleTimeString();
+            const logEl = document.getElementById('event-log');
+            logEl.style.display = 'block';
+            logEl.textContent += `[${timestamp}] ${message}\n`;
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+
+        // Table functions
+        function insertCustomTable() {
+            const tableHTML = `
+                <table style="width: 100%; border-collapse: collapse; margin: 1rem 0; border: 1px solid #ddd;">
+                    <thead>
+                        <tr style="background: #f5f5f5;">
+                            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Product</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Price</th>
+                            <th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Stock</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Widget A</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">$19.99</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">150</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1px solid #ddd; padding: 8px;">Widget B</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">$29.99</td>
+                            <td style="border: 1px solid #ddd; padding: 8px;">75</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+            tableEditor.insertHTML(tableHTML);
+            showOutput('table-output', 'Custom table inserted!');
+        }
+
+        function showTableFeatures() {
+            const content = tableEditor.getContent();
+            const hasTable = content.includes('<table');
+            showOutput('table-output', hasTable ? 'Table found in content!' : 'No table in content. Use the toolbar to insert one.');
+        }
+
+        // Utility function
+        function showOutput(elementId, text) {
+            const output = document.getElementById(elementId);
+            output.style.display = 'block';
+            output.textContent = text;
+        }
+
+        // Initialize word count
+        updateWordCount();
+    </script>
+</body>
+</html>

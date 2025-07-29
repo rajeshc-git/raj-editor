@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABI Text Editor</title>
+</head>
+<body>
+    <!-- Container for the editor -->
+    <div id="my-editor"></div>
+
+    <!-- Include the editor script -->
+    <script src="rich-text-editor.js"></script>
+    
+    <!-- Initialize the editor -->
+    <script>
+        // Create the editor instance
+        const editor = new RichTextEditor('my-editor', {
+            height: 'auto',
+            theme: 'light',
+            placeholder: '',
+            autoSave: true
+        });
+		
+		
+
+        // Optional: Get content
+        // const content = editor.getContent();
+        
+        // Optional: Set content
+        // editor.setContent('<p>Hello World!</p>');
+    </script>
+</body>
+</html>

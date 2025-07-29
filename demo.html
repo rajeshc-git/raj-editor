@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raj Text Editor Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background: #f8fafc;
+        }
+        
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .demo-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .demo-section {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .demo-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+        
+        .code-block {
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: Monaco, Menlo, 'Ubuntu Mono', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+        }
+        
+        .editor-container {
+            margin: 1rem 0;
+        }
+        
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .feature-item {
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 6px;
+            border-left: 4px solid #2563eb;
+        }
+        
+        .feature-item h4 {
+            margin: 0 0 0.5rem 0;
+            color: #1e293b;
+        }
+        
+        .feature-item p {
+            margin: 0;
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+        
+        .api-section {
+            background: #fefefe;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1>Raj Text Editor - Single File Solution</h1>
+            <p>A complete WYSIWYG editor with all functionality in one JavaScript file</p>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-title">Quick Start</h2>
+            <p>Include the JavaScript file and initialize the editor:</p>
+            
+            <div class="code-block">
+&lt;!-- Include the editor script --&gt;
+&lt;script src="rich-text-editor.js"&gt;&lt;/script&gt;
+
+&lt;!-- Create a container --&gt;
+&lt;div id="my-editor"&gt;&lt;/div&gt;
+
+&lt;script&gt;
+// Initialize the editor
+const editor = new RichTextEditor('my-editor', {
+    height: '400px',
+    theme: 'light',
+    placeholder: 'Start typing...',
+    autoSave: true
+});
+&lt;/script&gt;
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-title">Live Demo</h2>
+            <div class="editor-container">
+                <div id="demo-editor"></div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-title">Features</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <h4>Rich Formatting</h4>
+                    <p>Bold, italic, underline, strikethrough, fonts, colors, and more</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Document Management</h4>
+                    <p>Save, load, auto-save, and export in multiple formats</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Insert Media</h4>
+                    <p>Links, images, tables, horizontal rules</p>
+                </div>
+                <div class="feature-item">
+                    <h4>View Modes</h4>
+                    <p>WYSIWYG, HTML source, and preview modes</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Find & Replace</h4>
+                    <p>Powerful search and replace functionality</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Themes</h4>
+                    <p>Light and dark themes with smooth transitions</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Keyboard Shortcuts</h4>
+                    <p>Standard shortcuts for common operations</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Responsive Design</h4>
+                    <p>Works perfectly on desktop and mobile devices</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-title">Configuration Options</h2>
+            <div class="code-block">
+const editor = new RichTextEditor('container', {
+    height: '400px',           // Editor height
+    theme: 'light',            // 'light' or 'dark'
+    placeholder: 'Type here...', // Placeholder text
+    toolbar: 'full',           // Toolbar configuration
+    autoSave: true,            // Enable auto-save
+    spellCheck: true           // Enable spell checking
+});
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-title">API Methods</h2>
+            <div class="api-section">
+                <h3>Content Management</h3>
+                <div class="code-block">
+// Get/Set content
+const content = editor.getContent();  // Get HTML content
+editor.setContent('&lt;p&gt;Hello&lt;/p&gt;');     // Set HTML content
+
+// Get plain text
+const text = editor.getText();
+
+// Insert HTML
+editor.insertHTML('&lt;strong&gt;Bold text&lt;/strong&gt;');
+
+// Focus/Blur
+editor.focus();
+editor.blur();
+                </div>
+            </div>
+
+            <div class="api-section">
+                <h3>Document Operations</h3>
+                <div class="code-block">
+// Create new document
+editor.newDocument();
+
+// Save document
+editor.saveDocument();
+
+// Export in different formats
+editor.exportDocument('html');  // 'html', 'text', 'json'
+                </div>
+            </div>
+
+            <div class="api-section">
+                <h3>View Modes</h3>
+                <div class="code-block">
+// Toggle view modes
+editor.toggleSourceMode();   // HTML source view
+editor.togglePreviewMode();  // Preview mode
+editor.toggleTheme();        // Switch theme
+editor.toggleFullscreen();   // Fullscreen mode
+                </div>
+            </div>
+
+            <div class="api-section">
+                <h3>History Management</h3>
+                <div class="code-block">
+// Undo/Redo operations
+editor.undo();
+editor.redo();
+
+// Check if undo/redo available
+if (editor.canUndo()) {
+    editor.undo();
+}
+                </div>
+            </div>
+
+            <div class="api-section">
+                <h3>Cleanup</h3>
+                <div class="code-block">
+// Destroy editor instance
+editor.destroy();
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-title">Auto-Initialization</h2>
+            <p>You can also use data attributes for automatic initialization:</p>
+            <div class="code-block">
+&lt;div data-rich-editor 
+     data-height="300px"
+     data-theme="dark"
+     data-placeholder="Start writing..."
+     data-auto-save="true"&gt;&lt;/div&gt;
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-title">Integration Examples</h2>
+            
+            <h3>ASP.NET Core</h3>
+            <div class="code-block">
+@{
+    ViewData["Title"] = "Rich Editor";
+}
+
+&lt;div class="editor-container"&gt;
+    &lt;div id="content-editor"&gt;&lt;/div&gt;
+    &lt;button type="button" onclick="saveContent()"&gt;Save&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script src="~/js/rich-text-editor.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+    const editor = new RichTextEditor('content-editor');
+    
+    function saveContent() {
+        const content = editor.getContent();
+        fetch('/api/content/save', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content: content })
+        });
+    }
+&lt;/script&gt;
+            </div>
+
+            <h3>React Component</h3>
+            <div class="code-block">
+import { useEffect, useRef } from 'react';
+
+function RichEditor({ value, onChange }) {
+    const editorRef = useRef(null);
+    const instanceRef = useRef(null);
+
+    useEffect(() => {
+        instanceRef.current = new RichTextEditor(editorRef.current, {
+            height: '400px'
+        });
+
+        // Set initial value
+        if (value) {
+            instanceRef.current.setContent(value);
+        }
+
+        // Listen for changes
+        instanceRef.current.editor.addEventListener('input', () => {
+            onChange(instanceRef.current.getContent());
+        });
+
+        return () => {
+            instanceRef.current?.destroy();
+        };
+    }, []);
+
+    return &lt;div ref={editorRef} /&gt;;
+}
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-title">Multiple Editors</h2>
+            <p>You can have multiple editor instances on the same page:</p>
+            <div class="editor-container">
+                <div id="editor1" style="margin-bottom: 1rem;"></div>
+                <div id="editor2"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include the rich text editor -->
+    <script src="rich-text-editor.js"></script>
+    
+    <script>
+        // Initialize demo editors
+        const demoEditor = new RichTextEditor('demo-editor', {
+            height: '400px',
+            placeholder: 'Try out all the features! Use the toolbar, keyboard shortcuts (Ctrl+B, Ctrl+I, etc.), and right-click for context menu.'
+        });
+
+        // Multiple editors example
+        const editor1 = new RichTextEditor('editor1', {
+            height: '200px',
+            theme: 'light',
+            placeholder: 'First editor instance...'
+        });
+
+        const editor2 = new RichTextEditor('editor2', {
+            height: '200px', 
+            theme: 'dark',
+            placeholder: 'Second editor with dark theme...'
+        });
+
+        // Add some sample content
+        demoEditor.setContent(`
+            <h1>Welcome to Rich Text Editor</h1>
+            <p>This is a <strong>powerful</strong> and <em>feature-rich</em> WYSIWYG editor built with vanilla JavaScript.</p>
+            <h2>Key Features</h2>
+            <ul>
+                <li>Complete formatting toolbar</li>
+                <li>Document management</li>
+                <li>Export capabilities</li>
+                <li>Multiple view modes</li>
+                <li>Find and replace</li>
+                <li>Keyboard shortcuts</li>
+            </ul>
+            <p>Try editing this content, or use <kbd>Ctrl+F</kbd> to search, <kbd>Ctrl+B</kbd> for bold, and explore all the features!</p>
+        `);
+    </script>
+</body>
+</html>
