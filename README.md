@@ -2,7 +2,7 @@
 
 Raj Editor is a professional-grade, browser-based rich text editor designed with modern web standards using pure **HTML**, **CSS**, and **JavaScript** — inspired by CKEditor but built from scratch without external dependencies.
 
-![Raj Editor Screenshot](preview.png)
+
 
 ---
 
